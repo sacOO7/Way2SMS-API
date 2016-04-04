@@ -17,6 +17,13 @@ public class Way2SMS {
     Boolean LoginSuccessful = false;
     public static String Token;
 
+    /**
+     * Used for logging into way2sms site using username as a mobile no and password
+     * @param username
+     * @param pasword
+     * @throws ResponseException
+     * @throws NotFound
+     */
     public void Login(String username, String pasword) throws ResponseException, NotFound {
         agent = new UserAgent();
         agent.visit("http://site24.way2sms.com/content/index.html");
@@ -34,6 +41,12 @@ public class Way2SMS {
         }
     }
 
+    /**
+     * Used for traversing into dashboard page which is nothing but a form to send sms.
+     * @throws NotFound
+     * @throws ResponseException
+     */
+
     public void MakeDashBoardReady() throws NotFound, ResponseException {
         Form form1 = agent.doc.getForm(0);
         Element element = form1.getElement().findFirst("<input type=\"button\"");
@@ -47,10 +60,18 @@ public class Way2SMS {
         sms = agent.doc.getForm(0);
     }
 
+    /**
+     * Used to send sms to mobile no provided in arguments.You can use this method in loop , so that you dont have to login each time to send sms.
+     * @param Mobile_No
+     * @param Message
+     * @throws NotFound
+     * @throws ResponseException
+     */
+
     public void SendSMS(String Mobile_No, String Message) throws NotFound, ResponseException {
         if (LoginSuccessful) {
-            sms.setTextField("mobile", "7709758284");
-            sms.setTextArea("message", "Hi sachin again");
+            sms.setTextField("mobile", Mobile_No);
+            sms.setTextArea("message", Message);
             sms.setAction("http://site24.way2sms.com/./smstoss.action");
             sms.submit();
             if (agent.doc.innerHTML().contains("Message has")){
