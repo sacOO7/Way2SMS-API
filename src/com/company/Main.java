@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright 2016 sachin
  *
@@ -31,7 +29,7 @@ public class Main {
         way2SMS.Login(USERNAME,PASSWORD);
 
 //        for (int i=0;i<4;i++) {
-            way2SMS.SendSMS("", ""); //args ; Phone no , Message
+        way2SMS.SendSMS("", ""); //args ; Phone no , Message
 //        }
     }
 }
